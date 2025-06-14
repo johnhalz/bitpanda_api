@@ -4,24 +4,52 @@ version = "1.0.0"
 description = "BitPanda Price Ticker API Client"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [ "openapi-python-client>=0.25.0", "pyyaml>=6.0.2", "toml>=0.10.2",]
+dependencies = [
+    "openapi-python-client>=0.25.0",
+    "pyyaml>=6.0.2",
+    "toml>=0.10.2",
+]
 [[project.authors]]
 name = "John Halazonetis"
 email = "john.halazonetis@icloud.com"
 
 [build-system]
-requires = [ "hatchling",]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[dependency-groups]
+dev = ["pytest>=8.4.0", "pytest-asyncio>=1.0.0"]
+
 [tool.ruff]
-exclude = [ ".DS_Store", ".coverage", ".git", ".gitattributes", ".gitignore", ".gitmodules", ".idea", ".md", ".mypy_cache", ".pytest_cache", ".toml", ".tox", ".venv", ".vscode", "__pycache__", "build", "dist", "htmlcov", "node_modules", "package-lock.json",]
+exclude = [
+    ".DS_Store",
+    ".coverage",
+    ".git",
+    ".gitattributes",
+    ".gitignore",
+    ".gitmodules",
+    ".idea",
+    ".md",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".toml",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pycache__",
+    "build",
+    "dist",
+    "htmlcov",
+    "node_modules",
+    "package-lock.json",
+]
 line-length = 100
 indent-width = 4
 target-version = "py313"
 
 [tool.tomlsort]
 in_place = true
-sort_first = [ "project", "dependency-groups",]
+sort_first = ["project", "dependency-groups"]
 sort_table_keys = false
 sort_inline_tables = true
 sort_inline_arrays = false
@@ -34,14 +62,8 @@ docstring-code-format = false
 docstring-code-line-length = "dynamic"
 
 [tool.ruff.lint]
-select = [ "E4", "E7", "E9", "F",]
-ignore = [ "W",]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["W"]
 
 [tool.pytest.ini_options]
 asyncio_default_fixture_loop_scope = "function"
-
-[dependency-groups]
-dev = [
-    "pytest>=8.4.0",
-    "pytest-asyncio>=1.0.0",
-]

@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Bitpanda Ticker API
+  description: OpenAPI spec for querying the Bitpanda ticker endpoint.
+  version: 1.0.0
+
+servers:
+  - url: https://api.bitpanda.com/v1
+
+paths:
+  /ticker:
+    get:
+      summary: Get Ticker Prices
+      description: Retrieve current prices for various assets in different fiat currencies.
+      responses:
+        "200":
+          description: Successful response with ticker data.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  description: Fiat currency values for the asset
+                  additionalProperties:
+                    type: string
+                    description: Price as a string
+                    example: "123.45"
+
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+components:
+  responses:
+    BadRequest:
+      description: Bad request due to invalid input or malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+    InternalServerError:
+      description: The server encountered an internal error.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Bad Request"
+        message:
+          type: string
+          example: "The request could not be understood or was missing required parameters."
+        status:
+          type: integer
+          example: 400
